@@ -3771,7 +3771,7 @@ static u64 wl1271_op_prepare_multicast(struct ieee80211_hw *hw, int mc_count,
 		wl1271_error("Out of memory setting filters.");
 		return 0;
 	}
-asd
+
 	/* update multicast filtering parameters */
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,35))
 	fp->mc_list_length = 0;
