@@ -11,8 +11,8 @@
 #include <linux/pm_qos_params.h>
 #include <linux/smp_lock.h>
 
-#define kparam_block_sysfs_write(a)
-#define kparam_unblock_sysfs_write(a)
+//#define kparam_block_sysfs_write(a)
+//#define kparam_unblock_sysfs_write(a)
 
 /* mask va_format as RHEL6 backports this */
 #define va_format compat_va_format
