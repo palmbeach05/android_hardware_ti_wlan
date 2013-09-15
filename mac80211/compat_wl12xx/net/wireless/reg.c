@@ -33,6 +33,11 @@
  *
  */
 
+
+#ifndef pr_fmt
+#define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+#endif
+
 #include <linux/kernel.h>
 #include <linux/export.h>
 #include <linux/slab.h>
