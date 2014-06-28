@@ -38,8 +38,8 @@ compat-$(CONFIG_COMPAT_KERNEL_3_0) += compat-3.0.o
 compat-$(CONFIG_COMPAT_CORDIC) += cordic.o
 compat-$(CONFIG_COMPAT_CRC8) += crc8.o
 
-ifndef CONFIG_64BIT
-ifndef CONFIG_GENERIC_ATOMIC64
-  compat-y += compat_atomic.o
-endif
-endif
+#ifndef CONFIG_64BIT
+#ifndef CONFIG_GENERIC_ATOMIC64
+#  compat-y += compat_atomic.o
+#endif
+#endif
