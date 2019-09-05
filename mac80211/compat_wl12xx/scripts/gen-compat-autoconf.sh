@@ -198,4 +198,3 @@ if [ -f $KLIB_BUILD/Makefile ]; then
 		rm -f $MULT_DEP_FILE
 	fi
 fi
-echo "#endif /* COMPAT_AUTOCONF_INCLUDED */"
