@@ -18,11 +18,10 @@ ifneq ($(wildcard $(KLIB_BUILD)/Makefile),)
 
 COMPAT_LATEST_VERSION = 3
 
-KERNEL_VERSION := $(shell $(MAKE) -C $(KLIB_BUILD) kernelversion | sed -n 's/^\([0-9]\)\..*/\1/p')
+KERNEL_VERSION := 2
 
 ifneq ($(KERNEL_VERSION),2)
-KERNEL_SUBLEVEL := $(shell $(MAKE) -C $(KLIB_BUILD) kernelversion | sed -n 's/^3\.\([0-9]\+\).*/\1/p')
-else
+KERNEL_SUBLEVEL := 32
 COMPAT_26LATEST_VERSION = 39
 KERNEL_26SUBLEVEL := $(shell $(MAKE) -C $(KLIB_BUILD) kernelversion | sed -n 's/^2\.6\.\([0-9]\+\).*/\1/p')
 COMPAT_26VERSIONS := $(shell I=$(COMPAT_26LATEST_VERSION); while [ "$$I" -gt $(KERNEL_26SUBLEVEL) ]; do echo $$I; I=$$(($$I - 1)); done)
