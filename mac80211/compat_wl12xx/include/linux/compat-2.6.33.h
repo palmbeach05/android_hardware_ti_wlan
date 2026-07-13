@@ -58,8 +58,10 @@ static inline void compat_release_firmware(const struct firmware *fw)
 #define IFF_DONT_BRIDGE 0x800		/* disallow bridging this ether dev */
 /* source: include/linux/if.h */
 
-/* this will never happen on older kernels */
+/* This will never happen on older kernels unless the kernel has been patched. */
+#ifndef NETDEV_POST_INIT
 #define NETDEV_POST_INIT 0xffff
+#endif
 
 /* mask netdev_alloc_skb_ip_align as debian squeeze also backports this */
 #define netdev_alloc_skb_ip_align(a, b) compat_netdev_alloc_skb_ip_align(a, b)

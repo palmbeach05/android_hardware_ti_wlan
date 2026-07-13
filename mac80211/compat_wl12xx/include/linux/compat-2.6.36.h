@@ -95,11 +95,16 @@ struct pm_qos_request_list {
 #endif
 
 /*
- * Dummy printk for disabled debugging statements to use whilst maintaining
- * gcc's format and side-effect checking.
+ * If necessary, this is a dummy printk for disabled debugging statements
+ * to use whilst maintaining gcc's format and side-effect checking.
  */
+#include <linux/kernel.h>  /* Force the compiler to read kernel.h first */
+
+#ifndef HAVE_NO_PRINTK
+#define HAVE_NO_PRINTK
 static inline __attribute__ ((format (printf, 1, 2)))
 int no_printk(const char *s, ...) { return 0; }
+#endif
 
 #ifndef alloc_workqueue
 #define alloc_workqueue(name, flags, max_active) __create_workqueue(name, flags, max_active, 0)
@@ -108,19 +113,27 @@ int no_printk(const char *s, ...) { return 0; }
 #define EXTPROC	0200000
 #define TIOCPKT_IOCTL		64
 
+/* * Only define these if the kernel hasn't already provided 
+ * the new mutex-based tty_lock API.
+ */
+#ifndef _LINUX_TTY_H
+#include <linux/tty.h>
+#endif
+
 static inline void tty_lock(void) __acquires(kernel_lock)
 {
 #ifdef CONFIG_LOCK_KERNEL
-	/* kernel_locked is 1 for !CONFIG_LOCK_KERNEL */
 	WARN_ON(kernel_locked());
 #endif
 	lock_kernel();
 }
+
 static inline void tty_unlock(void) __releases(kernel_lock)
 {
 	unlock_kernel();
 }
-#define tty_locked()           (kernel_locked())
+
+#define tty_locked()			(kernel_locked())
 
 #define usleep_range(_min, _max)	msleep((_max) / 1000)
 
