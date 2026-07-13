@@ -9,7 +9,7 @@
  */
 
 #include <linux/compat.h>
-#include <linux/autoconf.h>
+#include <generated/autoconf.h>
 
 #if defined(CONFIG_PCCARD) || defined(CONFIG_PCCARD_MODULE)
 
