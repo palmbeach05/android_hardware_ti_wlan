@@ -5,6 +5,15 @@
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,25))
 #include_next <linux/pm_qos_params.h>
+
+#ifndef pm_qos_requirement
+#define pm_qos_requirement(qos) pm_qos_request(qos)
+#endif
+
+#ifndef pm_qos_request_active
+#define pm_qos_request_active(req) ((req) != 0)
+#endif
+
 #else
 /* interface for the pm_qos_power infrastructure of the linux kernel.
  *
